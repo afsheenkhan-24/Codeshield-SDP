@@ -8,7 +8,6 @@ class TestComplexity(unittest.TestCase):
         self.assertEqual(calculate_complexity(code), 1)
 
     def test_armstrong_logic(self):
-        # Your test.py has 1 'while' and 1 'if': M = 2 + 1 = 3
         code = """
                 while n > 0:
                     n //= 10
