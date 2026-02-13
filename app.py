@@ -25,6 +25,20 @@ def Complexity():
                 st.success("Analysis complete! Head to the Results tab.")
             else:
                 st.warning("Please paste some code first.") 
+
+    with tab3:
+        if st.session_state.analysis_done:
+            code_to_analyze = ""
+            if uploaded_file is not None:
+                code_to_analyze = file_content
+            elif code_input:
+                code_to_analyze = code_input
+            
+            complexity_score = calculate_complexity(code_to_analyze)
+            st.subheader("Analysis Results")
+            st.write(f"Code Complexity Score: {complexity_score}")
+        else:
+            st.info("Please run an analysis in the previous tabs to see results.")
             
 
 pg = st.navigation([Dashboard, Complexity, Settings])
