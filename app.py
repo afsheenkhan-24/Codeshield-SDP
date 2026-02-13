@@ -21,8 +21,10 @@ def Complexity():
 
     with tab2:
         code_input = st.text_area("Paste Python code here", height=200, key="code_input")
+        
         if st.button("Run Analysis", key="run_paste", type="primary"):
             if code_input:
+                st.session_state.file_content=code_input
                 st.session_state.analysis_done = True
                 st.success("Analysis complete! Head to the Results tab.")
             else:
