@@ -1,0 +1,28 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Supabase / secrets
+.supabase/
+*.env
+.env.local
+.env.*.local
+
+# Streamlit
+.streamlit/
+
+# OS / editor noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
