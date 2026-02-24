@@ -1,7 +1,7 @@
-from dashboard import Dashboard
-from settings import Settings
+from pages.dashboard import Dashboard
+from pages.settings import Settings
 import streamlit as st
-from analysis import calculate_complexity
+from pages.analysis import calculate_complexity
 
 def Complexity():
     st.title("Code Analysis and Security Tool")
