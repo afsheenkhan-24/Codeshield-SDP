@@ -5,6 +5,75 @@ import pages.analysis
 from pages.rules import SecurityConcerns
 
 def Complexity():
+
+    st.markdown("""
+        <style>
+        .card {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            height: 180px;
+            margin-bottom: 20px;
+        }
+        .title {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+        }
+        .critical-label {
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .red-flags {
+            color: #000000;
+        }
+
+        /* Red Flag Section from your image */
+
+        .red-flag-header {
+            background-color: #ffffff;    /* White background */
+            color: #666666;               /* Grey text */
+            padding: 15px 20px;           /* Spacing inside the box */
+            border-radius: 12px;          /* Curved edges */
+            font-weight: bold;
+            font-size: 18px;
+            border: 1px solid #eeeeee;    /* Subtle border for definition */
+            margin-bottom: 20px;          /* Space between header and first card */
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        .red-flag-card {
+            background-color: #f4f4f4;
+            border-left: 6px solid #888;
+            padding: 12px 20px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+        }
+        .red-flag-title {
+            font-weight: bold;
+            color: #222;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .red-flag-desc {
+            color: #555;
+            font-size: 13px;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+
     st.title("Code Analysis and Security Tool")
     if 'analysis_done' not in st.session_state:
         st.session_state.analysis_done = False
@@ -50,22 +119,24 @@ def Complexity():
 
 
             tdi = (cc+vd)/2
-            if tdi>50:
+            if tdi > 50:
                 tdi_label = "Critical"
+                label_bg = "#ffdce0"  
+                label_text_color = "#af080d"  
             else:
                 tdi_label = "Fine"
+                label_bg = "#dcfce7"  # Soft Green
+                label_text_color = "#166534"
 
             col1, col2, col3 = st.columns(3)
             with col1:
-                st.markdown(f'<div class="card"><div class="title">Technical Depth Index (TDI)</div><div class="value">{tdi}</div><div class="critical-label">{tdi_label}</div></div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="card"><div class="title">Technical Depth Index (TDI)</div><div class="value">{tdi}</div><div class="critical-label" style="background-color: {label_bg}; color: {label_text_color};">{tdi_label}</div></div>', unsafe_allow_html=True)
             with col2:
                 st.markdown(f'<div class="card"><div class="title">Cyclomatic Complexity</div><div class="value">{cc}</div><div class="nodes-edges">Nodes(N): {nodes}<br>Edges (E): {edges}</div></div>', unsafe_allow_html=True)
             with col3:
                 st.markdown(f'<div class="card"><div class="title">Vulnerability Density</div><div class="value">{vd}</div><div class="red-flags">No.of.Red Flags: {red_flags}</div></div>', unsafe_allow_html=True)
 
 
-
-            st.markdown('<div class="red-flag-container">', unsafe_allow_html=True)
             st.markdown('<div class="red-flag-header">Identified Security Red Flags</div>', unsafe_allow_html=True)
             
             if red_flags > 0:
@@ -84,6 +155,7 @@ def Complexity():
 
             if st.button("Generate Report"):
                 pass
+    
 
 pg = st.navigation([Dashboard, Complexity, Settings])
 pg.run()
