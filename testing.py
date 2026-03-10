@@ -1,5 +1,5 @@
 import unittest
-from pages.analysis import calculate_complexity
+from pages.complexity import calculate_complexity
 
 class TestComplexity(unittest.TestCase):
 
