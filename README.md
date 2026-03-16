@@ -4,7 +4,15 @@
 [![Streamlit](https://img.shields.io/badge/Streamlit-%23FF6B35.svg?&logo=streamlit&logoColor=white)](https://streamlit.io/)
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPL3-yellow.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-**CodeShield-SDP** is an AI-powered web application built with Streamlit that scans Python code for technical debt metrics (e.g., cyclomatic complexity via AST parsing) and security vulnerabilities. Upload code, visualize graphs of nodes/edges, and get actionable insights.[page:1]
+**CodeShield-SDP** is a web application built with Streamlit that scans Python code for technical debt metrics (e.g., cyclomatic complexity via AST parsing) and security vulnerabilities. Upload code, visualize graphs of nodes/edges, and get actionable insights.
+
+## 🌐 Live Demo
+
+You can try CodeShield-SDP online here:
+
+👉 [Open the live app] https://codeshield-tech-solutions.streamlit.app/
+
+No setup needed – upload your Python file and explore the technical debt and security insights in the browser.
 
 ## ✨ Click for Details
 
@@ -68,4 +76,4 @@ Fork, PRs welcome! Focus on adding more vuln detectors or ML-based debt scoring.
 
 GPL-3.0 [LICENSE](LICENSE)
 
-**Stars and feedback appreciated! ⭐** [page:1]
+**Stars and feedback appreciated! ⭐**
