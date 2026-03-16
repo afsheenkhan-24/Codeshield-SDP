@@ -51,6 +51,7 @@ codeshield-sdp/
 ├── .gitignore
 ├── LICENSE
 └── README.md
+```
 
 ### <details>
 
@@ -86,4 +87,7 @@ Fork, PRs welcome! Focus on adding more vuln detectors or ML-based debt scoring.
 GPL-3.0 [LICENSE](LICENSE)
 
 **Stars and feedback appreciated! ⭐**
+
+```
+
 ```
