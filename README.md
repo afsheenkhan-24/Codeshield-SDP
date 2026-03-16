@@ -57,7 +57,7 @@ codeshield-sdp/
 
 <summary>🚀 Quick Start</summary>
 
-1. Clone: `git clone https://github.com/afsheenkhan-24/codeshield-sdp.git`
+1. Clone: `git clone https://github.com/afsheenkhan-24/Codeshield-SDP.git`
 2. Install: `pip install -r requirements.txt`
 3. Run: `streamlit run app.py`
 4. Open browser to `localhost:8501` and upload Python code for scanning.
@@ -74,7 +74,7 @@ Set Supabase env vars for full features.
 - Supabase integration for persistent data.
 - CSS refinements and testing enhancements.
 
-See [commits](https://github.com/afsheenkhan-24/codeshield-sdp/commits/main/) for full history.
+See [commits](https://github.com/afsheenkhan-24/Codeshield-SDP/commits/main/) for full history.
 
 </details>
 
@@ -87,7 +87,3 @@ Fork, PRs welcome! Focus on adding more vuln detectors or ML-based debt scoring.
 GPL-3.0 [LICENSE](LICENSE)
 
 **Stars and feedback appreciated! ⭐**
-
-```
-
-```
