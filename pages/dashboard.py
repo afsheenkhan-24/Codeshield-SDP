@@ -88,14 +88,15 @@ def render_metric_card(label, value, delta_text=None, delta_positive=None):
 
 
 def Dashboard():
-    st.title("Dashboard")
-    st.caption("Overview of your code analysis activity")
+    st.header("Dashboard")
+    st.subheader("Welcome back!")
+    st.caption("Here's an overview of your code analysis activity.")
 
-    # ── Load data ──────────────────────────────────────────────────────────────
+    # ---- Load data ----
     with st.spinner("Loading dashboard data..."):
         try:
             records = get_dashboard_data()
-            st.table(records)
+            # st.table(records)
         except Exception as e:
             st.error(f"Failed to load data from Supabase: {e}")
             return
@@ -104,6 +105,91 @@ def Dashboard():
         st.info("No scans yet. Upload or paste code in the **Complexity** tab to get started.")
         return
     
+    # st.markdown("---")
     
-
+    metrics = compute_metrics(records)
+ 
+    # ---- Summary metric cards ----
+    col1, col2, col3 = st.columns(3)
+ 
+    with col1:
+        delta_str = None
+        delta_pos = None
+        if metrics["week_delta"] is not None:
+            delta_str = f"{abs(metrics['week_delta'])}% vs last week"
+            delta_pos = metrics["week_delta"] >= 0
+        render_metric_card(
+            "Total scans",
+            metrics["total_scans"],
+            delta_str,
+            delta_pos,
+        )
+ 
+    with col2:
+        render_metric_card(
+            "Scans this week",
+            metrics["scans_this_week"],
+        )
+ 
+    with col3:
+        render_metric_card(
+            "Avg lines of code",
+            metrics["avg_loc"],
+        )
+ 
     st.markdown("---")
+
+    # ---- Charts row ----
+    chart_col, breakdown_col = st.columns([1, 1])
+ 
+    with chart_col:
+        st.subheader("Scan activity (last 7 days)")
+        activity = metrics["activity"]
+        st.bar_chart({"Scans": list(activity.values())}, x_label="Day", y_label="Scans")
+        label_cols = st.columns(len(activity))
+        for i, label in enumerate(activity.keys()):
+            with label_cols[i]:
+                st.caption(label.split(" ")[0])  # Show Mon, Tue, ....
+ 
+    with breakdown_col:
+        st.subheader("Scan type breakdown")
+        type_counts = metrics["type_counts"]
+        if type_counts:
+            import pandas as pd
+            df = pd.DataFrame(
+                {"Type": list(type_counts.keys()), "Count": list(type_counts.values())}
+            ).set_index("Type")
+            st.bar_chart(df)
+        else:
+            st.caption("No data available.")
+ 
+    st.markdown("---")
+
+    # ---- Recent scans table ----
+    st.subheader("Recent scans")
+ 
+    recent = records[:5]  # Show latest 5
+ 
+    for scan in recent:
+        raw_ts = scan.get("created_at", "")
+        try:
+            ts = datetime.fromisoformat(raw_ts.replace("Z", "+00:00"))
+            date_str = ts.strftime("%d %b %Y, %H:%M")
+        except Exception:
+            date_str = raw_ts
+ 
+        title = scan.get("codeTitle") or "Untitled"
+        scan_type = scan.get("codeType", "—")
+        loc = scan.get("linesOfCode", "—")
+ 
+        with st.container(border=True):
+            c1, c2, c3, c4 = st.columns([3, 2, 1, 2])
+            c1.markdown(f"**{title}**")
+            c2.caption(scan_type)
+            c3.caption(f"{loc} LOC")
+            c4.caption(date_str)
+ 
+    if len(records) > 5:
+        st.caption(f"Showing 5 of {len(records)} scans.")
+ 
+ 
