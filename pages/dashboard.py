@@ -77,6 +77,16 @@ def compute_metrics(records):
     }
 
 
+def render_metric_card(label, value, delta_text=None, delta_positive=None):
+    """Render a styled metric with optional delta indicator."""
+    if delta_text is not None:
+        icon = "▲" if delta_positive else "▼"
+        color = "green" if delta_positive else "red"
+        st.metric(label=label, value=value, delta=f"{icon} {delta_text}")
+    else:
+        st.metric(label=label, value=value)
+
+
 def Dashboard():
     st.title("Dashboard")
     st.caption("Overview of your code analysis activity")
@@ -93,5 +103,7 @@ def Dashboard():
     if not records:
         st.info("No scans yet. Upload or paste code in the **Complexity** tab to get started.")
         return
+    
+    
 
     st.markdown("---")
