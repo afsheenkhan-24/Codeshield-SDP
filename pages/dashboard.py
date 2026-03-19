@@ -89,7 +89,9 @@ def render_metric_card(label, value, delta_text=None, delta_positive=None):
 
 def Dashboard():
     st.header("Dashboard")
-    st.subheader("Welcome back!")
+    name = st.session_state.get("profile", {}).get("full_name", "")
+    greeting = f"Welcome back, {name}!" if name else "Welcome back!"
+    st.subheader(greeting)
     st.caption("Here's an overview of your code analysis activity.")
 
     # ---- Load data ----
