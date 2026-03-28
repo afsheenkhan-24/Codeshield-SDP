@@ -4,12 +4,17 @@ from pages.settings import Settings
 from pages.complexity import calculate_complexity, calculate_nodes_and_edges, count_loc
 from pages.rules import SecurityConcerns
 from utils.supabase_client import insert_code
+import os
 
 st.set_page_config(
     page_title="CodeShield",
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+LOGO_PATH = "Tech solutions logo.png"
+if os.path.exists(LOGO_PATH):
+    st.logo(LOGO_PATH, size='large')
 
 def Complexity():
     st.header("Code Analysis and Security Tool")
