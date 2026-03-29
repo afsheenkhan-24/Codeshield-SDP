@@ -10,7 +10,7 @@ def run_auth() -> bool:
 
     supabase = get_supabase_client()
 
-    st.title("CodeShield")
+    st.title("CodeShield Tech Solutions")
     st.caption("Technical Debt and Security Scanner")
     # st.markdown("---")
 
