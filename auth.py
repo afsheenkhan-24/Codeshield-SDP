@@ -37,9 +37,12 @@ def run_auth() -> bool:
                         st.session_state["user"] = user
                         # Pre-populate profile with name from Supabase metadata
                         full_name = user.user_metadata.get("full_name", "")
+                        email = user.user_metadata.get("email", "")
                         if "profile" not in st.session_state:
                             st.session_state["profile"] = {}
                         st.session_state["profile"]["full_name"] = full_name
+                        st.session_state["profile"]["email"] = email
+                        st.session_state["profile"]["role"] = "Platform Engineer"
                         st.rerun()
                     else:
                         st.error("Sign in failed. Please check your credentials.")

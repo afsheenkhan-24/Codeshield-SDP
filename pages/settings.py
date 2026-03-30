@@ -53,6 +53,7 @@ def Settings():
             st.session_state.profile["email"] = email
             st.session_state.profile["role"] = role
             st.success("Profile saved.")
+        
 
     '''st.markdown("---")
 
