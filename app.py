@@ -281,13 +281,17 @@ def Complexity():
 
         st.subheader("Security red flags")
         if r["findings"]:
-            severity_label = {1: "Low", 2: "High", 3: "Critical"}
+            severity_styles = {
+                1: {"label": "Low", "color": "green", "bg-color": "green-background"},
+                2: {"label": "Medium", "color": "orange", "bg-color": "orange-background"}, 
+                3: {"label": "High", "color": "red", "bg-color": "red-background"}
+            }
             for finding in r["findings"]:
                 with st.container(border=True):
+                    style = severity_styles.get(finding["severity"], {"label": "Unknown", "color": "gray", "bg-color": "gray-background"})
                     col_a, col_b = st.columns([4, 1])
-                    col_a.markdown(f"**{finding['rule_title']}** — `{finding['rule']}`")
-                    col_b.markdown(severity_label.get(finding["severity"], ""))
-                    st.write(finding["description"])
+                    col_a.markdown(f"**{finding['description']}**")
+                    col_b.markdown(f":{style['bg-color']}[**:{style['color']}[{style['label']}]**]")
                     st.caption(f"Why this matters: {finding['justification']}")
         else:
             st.success("No security vulnerabilities identified.")
